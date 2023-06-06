@@ -122,17 +122,17 @@ $(document).ready(function () {
         var searchInput = searchInputEl.val().trim();
         fetchWeatherData(searchInput);
         storeSearchHistory(searchInput);
+        // Change the class to d-block to display weather
+        $("#weathers").removeClass("d-none").addClass("d-block");
     }
 
-    // Handle keyup event on search input
-    searchInputEl.on("keypress", function (event) {
-        if (event.which === 13) {
-            // Enter key pressed
+    // Event listeners for search button click and search input keypress
+    $("#searchBtn").on("click", handleFormSubmit);
+    $("#searchInput").on("keypress", function (event) {
+        if (event.which === 13) { // Enter key pressed
             handleFormSubmit(event);
         }
     });
-    // Add event listener to search button
-    searchBtnEl.on("click", handleFormSubmit);
 
     // Render search history cities
     function renderCities() {
@@ -151,14 +151,16 @@ $(document).ready(function () {
     }
 
     // Handle clear button click
-    function handleClearButtonClick() {
+    $("#clearBtn").on("click", function () {
         localStorage.clear(); // Clear all items in localStorage
         searchHistory = []; // Clear the search history array
         renderCities(); // Update the UI
-    }
+        // Clear the search input box
+        $("#searchInput").val('');
+        // Change class back to d-none when the clear button is clicked
+        $("#weathers").removeClass("d-block").addClass("d-none");
+    });
 
-    // Add event listener to clear button
-    $("#clearBtn").on("click", handleClearButtonClick);
 
     // Store search history
     function storeSearchHistory(searchInput) {
