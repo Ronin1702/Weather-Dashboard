@@ -30,7 +30,7 @@ $(document).ready(function () {
                         icon: weatherIcon
                     };
                     // Update the UI with the current weather data
-                    $("#city-name").text(searchInput);
+                    $("#city-name").text("Right now in " + searchInput);
                     $("#temp").text("Temperature: " + weatherData.temp.toFixed(2) + " °F");
                     $("#wind").text("Wind Speed: " + weatherData.wind.toFixed(2) + " mph");
                     $("#humidity").text("Humidity: " + weatherData.humidity + "%");
@@ -100,9 +100,9 @@ $(document).ready(function () {
 
             // Create the content for the forecast card
             const forecastContent = $("<div>")
-                .append($("<p>").text(shortDate))
-                .append($("<p>").text("Temp: " + forecastTemperature.toFixed(2) + " °F"))
-                .append($("<p>").text("Wind: " + forecastWind.toFixed(2) + " mph"))
+                .append($("<p>").addClass("text-center fs-4").text(shortDate))
+                .append($("<p>").text("Temp: " + forecastTemperature.toFixed(0) + " °F"))
+                .append($("<p>").text("Wind: " + forecastWind.toFixed(0) + " mph"))
                 .append($("<p>").text("Humidity: " + forecastHumidity + "%"))
                 .append($("<img>").attr("src", "http://openweathermap.org/img/w/" + forecastIcon + ".png"));
 
@@ -120,19 +120,39 @@ $(document).ready(function () {
     function handleFormSubmit(event) {
         event.preventDefault();
         var searchInput = searchInputEl.val().trim();
-        fetchWeatherData(searchInput);
-        storeSearchHistory(searchInput);
-        // Change the class to d-block to display weather
-        $("#weathers").removeClass("d-none").addClass("d-block");
+
+        // Check if the search input is not empty
+        if (searchInput !== "") {
+            fetchWeatherData(searchInput);
+            storeSearchHistory(searchInput);
+
+            // Clear the input field
+            searchInputEl.val("");
+        }
     }
 
-    // Event listeners for search button click and search input keypress
-    $("#searchBtn").on("click", handleFormSubmit);
-    $("#searchInput").on("keypress", function (event) {
-        if (event.which === 13) { // Enter key pressed
+    // Event for keypress on search input
+    $('#searchInput').on('keypress', function (event) {
+        if (event.which === 13) {
+            // Enter key pressed
+            event.preventDefault(); // Prevent the default action (form submission)
             handleFormSubmit(event);
+            // Change the class to d-block to display weathers
+            $('#weathers').removeClass('d-none').addClass('d-block');
+            // Clear the input box
+            $('#searchInput').val('');
         }
     });
+
+    // Event for click on search button
+    $('#searchBtn').on('click', function (event) {
+        handleFormSubmit(event);
+        // Change class to d-block when the search button is clicked
+        $('#weathers').removeClass('d-none').addClass('d-block');
+        // Clear the input box
+        $('#searchInput').val('');
+    });
+
 
     // Render search history cities
     function renderCities() {
@@ -179,8 +199,34 @@ $(document).ready(function () {
 
     // Initialize the page
     function init() {
-        renderCities();
+        // If there is history in localStorage, get it and display it
+        if (localStorage.getItem("Search History")) {
+            searchHistory = JSON.parse(localStorage.getItem("Search History"));
+            renderCities();
+
+            // Fetch and display weather data of the last searched city
+            let lastSearchedCity = searchHistory[searchHistory.length - 1];
+            if (lastSearchedCity) {
+                fetchWeatherData(lastSearchedCity);
+                // Show the weather card
+                $("#weathers").removeClass("d-none").addClass("d-block");
+            }
+        }
     }
 
     init();
+
+    $('li.list-group-item').hover(
+        function () {
+            $(this).css('background-color', '#0d6efd');
+            $(this).css('color', '#ffffff');
+        }, // when mouse enters
+
+        function () {
+            $(this).css('background-color', '');
+            $(this).css('color', '');
+        } // when mouse leaves
+    );
+
 });
+
