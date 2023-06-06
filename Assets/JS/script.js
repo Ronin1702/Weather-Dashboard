@@ -37,21 +37,14 @@ $(document).ready(function () {
                     $("#current-pic").attr("src", "http://openweathermap.org/img/w/" + weatherData.icon + ".png");
                 })
 
+            $.getJSON(forecastWeatherUrl)
                 .done(function (forecastData) {
                     console.log(forecastData);
                     // Process forecast data and update UI
                     getForecast(weatherData, forecastData);
                     renderCities();
                 })
-
-                .fail(function (error) {
-                    console.log(error);
-                });
-
-            $.getJSON(forecastWeatherUrl)
-                .done(function (forecastData) {
-                    getForecast(weatherData, forecastData);
-                })
+                
                 .fail(function (error) {
                     console.log(error);
                 });
@@ -128,7 +121,7 @@ $(document).ready(function () {
 
             // Clear the input field
             searchInputEl.val("");
-        } else{
+        } else {
             return;// Prevent the rest of the function from running
         }
     }
@@ -150,7 +143,7 @@ $(document).ready(function () {
     $('#searchBtn').on('click', function (event) {
         var searchInput = searchInputEl.val().trim();
         if (searchInput === "") {
-            
+
             return; // Prevent the rest of the function from running
         }
         handleFormSubmit(event);
