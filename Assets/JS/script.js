@@ -12,8 +12,8 @@ $(document).ready(function () {
 
     // Fetch weather data
     function fetchWeatherData(searchInput) {
-        const currentWeatherUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + searchInput + "&appid=" + apiKey;
-        const forecastWeatherUrl = "http://api.openweathermap.org/data/2.5/forecast?q=" + searchInput + "&appid=" + apiKey;
+        const currentWeatherUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + searchInput + "&appid=" + apiKey;
+        const forecastWeatherUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchInput + "&appid=" + apiKey;
 
         if (searchInput !== null && searchInput !== undefined && searchInput !== "") {
             $.getJSON(currentWeatherUrl)
