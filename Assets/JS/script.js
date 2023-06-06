@@ -128,6 +128,8 @@ $(document).ready(function () {
 
             // Clear the input field
             searchInputEl.val("");
+        } else{
+            return;// Prevent the rest of the function from running
         }
     }
 
@@ -146,6 +148,11 @@ $(document).ready(function () {
 
     // Event for click on search button
     $('#searchBtn').on('click', function (event) {
+        var searchInput = searchInputEl.val().trim();
+        if (searchInput === "") {
+            
+            return; // Prevent the rest of the function from running
+        }
         handleFormSubmit(event);
         // Change class to d-block when the search button is clicked
         $('#weathers').removeClass('d-none').addClass('d-block');
@@ -159,10 +166,17 @@ $(document).ready(function () {
         // Clear previous history
         historyEl.empty();
 
+        // Hide the list-group-items if searchHistory is empty, else show them
+        if (searchHistory.length === 0) {
+            $('.li.list-group-item').addClass('d-none');
+        } else {
+            $('.li.list-group-item').removeClass('d-none');
+        }
+
         for (var i = searchHistory.length; i >= 0; i--) {
             var cityInput = searchHistory[i];
             // Append a city list div of <li>
-            var cityDiv = $("<li class='list-group-item'>").text(cityInput);
+            var cityDiv = $("<li>").addClass("list-group-item").text(cityInput);
             cityDiv.on("click", function () {
                 fetchWeatherData($(this).text());
             });
@@ -193,7 +207,7 @@ $(document).ready(function () {
             searchHistory = searchHistory.slice(-5);
         }
         localStorage.setItem("Search History", JSON.stringify(searchHistory));
-        localStorage.setItem("City", searchInput); // Store searchInput in localStorage with key "City"
+        localStorage.setItem("Current City", searchInput); // Store searchInput in localStorage with key "City"
         renderCities();
     }
 
@@ -216,17 +230,17 @@ $(document).ready(function () {
 
     init();
 
-    $('li.list-group-item').hover(
-        function () {
+    // Event delegation
+    $(document).on({
+        mouseenter: function () {
             $(this).css('background-color', '#0d6efd');
             $(this).css('color', '#ffffff');
-        }, // when mouse enters
-
-        function () {
+        },
+        mouseleave: function () {
             $(this).css('background-color', '');
             $(this).css('color', '');
-        } // when mouse leaves
-    );
+        }
+    }, 'li.list-group-item');
 
 });
 
