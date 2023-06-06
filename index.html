@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Font Awesome Kit API -->
+    <script src="https://kit.fontawesome.com/2ca4a978bf.js" crossorigin="anonymous"></script>
     <!-- Link jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <!-- JavaScript bundle for bootstrap -->
@@ -23,13 +25,13 @@
 
 <body>
     <!-- d-block to show, d-none to hide -->
-    <header class="container-fluid p-3 m-1 bg-primary bg-gradient text-light text-center rounded">
+    <header class="container-fluid p-3 bg-primary bg-gradient text-light text-center">
         <h1>Weather Dashboard</h1>
     </header>
 
-    <div class="container-fluid m-1">
-        <div class="row">
-            <form class="col-4">
+    <div class="container-fluid ms-3">
+        <div class="row justify-content-around">
+            <form class="col-3">
                 <h2>Search for a City:</h2>
                 <div class="input-group">
                     <div class="col-12 mb-2 form-floating">
@@ -40,17 +42,18 @@
                 </div>
                 <div class="row justify-content-around">
                     <button class="col-5 btn btn-primary" type="button" id="searchBtn">
-                        <i class="fas fa-search">Search</i>
+                        <i class="fas fa-search"> Search</i>
                     </button>
                     <button class="col-5 btn btn-primary" type="button" id="clearBtn">
-                        <i class="fas fa-trash">Clear</i>
+                        <i class="fas fa-trash"> Clear</i>
                     </button>
                 </div>
-                <ul id="history"></ul>
+                <ul class="col-12 fs-3 list-group list-group-flush bg-light text-center" id="history">
+                </ul>
             </form>
-            <div class="col-8">
-                <div class="row me-2 align-self-center">
-                    <div class="col-12 card m-1 d-block" id="currentWeather">
+            <div class="col-8 mt-3 me-3">
+                <div class="col-12">
+                    <div class="col-12 card d-block" id="currentWeather">
                         <div class="card-body">
                             <h3 id="city-name" class="city-name align-middle"></h3>
                             <img id="current-pic" alt="Weather Icon">
@@ -60,17 +63,18 @@
                         </div>
                     </div>
                 </div>
-                <div class="row d-block" id="fiveday-header">
+                <div class="row d-none" id="fiveday-header">
                     <div class="col-12">
                         <h3>5-Day Forecast: </h3>
                     </div>
-                </div>
-                <div class="row d-block">
-                    <div class="col-md-2 forecast bg-primary text-white m-2 rounded"></div>
-                    <div class="col-md-2 forecast bg-primary text-white m-2 rounded"></div>
-                    <div class="col-md-2 forecast bg-primary text-white m-2 rounded"></div>
-                    <div class="col-md-2 forecast bg-primary text-white m-2 rounded"></div>
-                    <div class="col-md-2 forecast bg-primary text-white m-2 rounded"></div>
+
+                    <div class="row">
+                        <div class="col-md-2 forecast bg-primary text-white m-2 rounded"></div>
+                        <div class="col-md-2 forecast bg-primary text-white m-2 rounded"></div>
+                        <div class="col-md-2 forecast bg-primary text-white m-2 rounded"></div>
+                        <div class="col-md-2 forecast bg-primary text-white m-2 rounded"></div>
+                        <div class="col-md-2 forecast bg-primary text-white m-2 rounded"></div>
+                    </div>
                 </div>
             </div>
         </div>

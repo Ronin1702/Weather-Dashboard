@@ -70,9 +70,10 @@ $(document).ready(function () {
         // Clear previous history
         historyEl.empty();
 
-        for (var i = searchHistory.length - 1; i >= 0; i--) {
+        for (var i = searchHistory.length; i >= 0; i--) {
             var cityInput = searchHistory[i];
-            var cityDiv = $("<div>").text(cityInput);
+            // Append a city list div of <li>
+            var cityDiv = $("<li class='list-group-item'>").text(cityInput);
             cityDiv.on("click", function () {
                 fetchWeatherData($(this).text());
             });
