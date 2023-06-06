@@ -17,45 +17,43 @@
     <!-- Link to the newest/first Font libray on CDNjs.com -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        crossorigin="anonymous" />
     <title>Weather Dashboard</title>
 </head>
 
 <body>
-    <!-- use container-12 so that me-1 can apply. Somehow container-fluid won't work as intended -->
     <!-- d-block to show, d-none to hide -->
-    <header class="container-12 p-3 m-1 bg-primary bg-gradient text-light text-center rounded">
+    <header class="container-fluid p-3 m-1 bg-primary bg-gradient text-light text-center rounded">
         <h1>Weather Dashboard</h1>
     </header>
 
-    <div class="container-12 m-1">
+    <div class="container-fluid m-1">
         <div class="row">
-            <div class="col-3">
+            <form class="col-4">
                 <h2>Search for a City:</h2>
-                <div class="input-group has-validation">
-                    <div class="col-12 mb-2 form-floating is-invalid">
-                        <input id="searchInput" type="text" class="form-control is-invalid form-control-lg"
-                            placeholder="Enter a City" aria-label="Enter a City" required>
+                <div class="input-group">
+                    <div class="col-12 mb-2 form-floating">
+                        <input id="searchInput" type="text" class="form-control form-control-lg"
+                            placeholder="Enter a City" aria-label="Enter a City">
                         <label for="searchInput">Enter a City</label>
-                        <div class="invalid-feedback">
-                            Please enter a city name.
-                        </div>
                     </div>
                 </div>
                 <div class="row justify-content-around">
-                    <button class="col-5 btn btn-primary" type="button" id="searchBtn"><i class="fas fa-search">
-                            Search</i></button>
-                    <button class="col-5 btn btn-primary" type="button" id="clearBtn"><i class="fas fa-trash">
-                            Clear</i></button>
+                    <button class="col-5 btn btn-primary" type="button" id="searchBtn">
+                        <i class="fas fa-search">Search</i>
+                    </button>
+                    <button class="col-5 btn btn-primary" type="button" id="clearBtn">
+                        <i class="fas fa-trash">Clear</i>
+                    </button>
                 </div>
-                <form id="history"></form>
-            </div>
-            <div class="col-9">
+                <ul id="history"></ul>
+            </form>
+            <div class="col-8">
                 <div class="row me-2 align-self-center">
                     <div class="col-12 card m-1 d-block" id="currentWeather">
                         <div class="card-body">
                             <h3 id="city-name" class="city-name align-middle"></h3>
-                            <img id="current-pic" alt="">
+                            <img id="current-pic" alt="Weather Icon">
                             <p id="temp"></p>
                             <p id="wind"></p>
                             <p id="humidity"></p>
@@ -67,7 +65,7 @@
                         <h3>5-Day Forecast: </h3>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row d-block">
                     <div class="col-md-2 forecast bg-primary text-white m-2 rounded"></div>
                     <div class="col-md-2 forecast bg-primary text-white m-2 rounded"></div>
                     <div class="col-md-2 forecast bg-primary text-white m-2 rounded"></div>
@@ -78,7 +76,7 @@
         </div>
 
 
-        <script src="./Assets/JAVA/script.js"></script>
+        <script src="./Assets/JS/script.js"></script>
 
 </body>
 
