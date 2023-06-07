@@ -53,14 +53,23 @@ $(document).ready(function () {
                     $("#wind").text("Wind Speed: " + weatherData.wind.toFixed(2) + " MPH");
                     $("#humidity").text("Humidity: " + weatherData.humidity + "%");
                     $("#current-pic").attr("src", "http://openweathermap.org/img/w/" + weatherData.icon + ".png");
+
+                    storeSearchHistory(searchInput);  // Store city in localStorage here
+
                 })
 
+
+                .fail(function (error) {
+                    console.log(error);
+                });
             $.getJSON(forecastWeatherUrl)
                 .done(function (forecastData) {
                     console.log(forecastData);
                     // Process forecast data and update UI
                     getForecast(weatherData, forecastData);
                     renderCities();
+
+                    storeSearchHistory(searchInput);  // Store city in localStorage here
                 })
 
                 .fail(function (error) {
@@ -142,7 +151,6 @@ $(document).ready(function () {
         // Check if the search input is not empty
         if (searchInput !== "") {
             fetchWeatherData(searchInput);
-            storeSearchHistory(searchInput);
 
             // Clear the input field
             searchInputEl.val("");
@@ -210,7 +218,7 @@ $(document).ready(function () {
     // Store search history
     function storeSearchHistory(searchInput) {
         searchInput = formatInput(searchInput);
-        
+
         if (searchHistory.includes(searchInput)) {
             // If it exists, return without adding it again
             return;
