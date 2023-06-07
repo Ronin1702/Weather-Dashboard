@@ -16,6 +16,24 @@ $(document).ready(function () {
         const forecastWeatherUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchInput + "&appid=" + apiKey;
 
         if (searchInput !== null && searchInput !== undefined && searchInput !== "") {
+            // Get today's date
+            let today = new Date();
+
+            // Extract the day, month, and year
+            let day = today.getDate();
+            let year = today.getFullYear();
+
+            // Get the name of the day of the week
+            let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            let dayOfWeek = days[today.getDay()];
+
+            // Get the name of the month
+            let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            let month = months[today.getMonth()];
+
+            // Create a formatted date string
+            let formattedDate = dayOfWeek + " " + month + " " + day + ", " + year;
+
             $.getJSON(currentWeatherUrl)
                 .done(function (currentData) {
                     console.log(currentData);
@@ -30,9 +48,9 @@ $(document).ready(function () {
                         icon: weatherIcon
                     };
                     // Update the UI with the current weather data
-                    $("#city-name").text("Right now in " + searchInput);
+                    $("#city-name").text(searchInput + " Today, "+ formattedDate);
                     $("#temp").text("Temperature: " + weatherData.temp.toFixed(2) + " °F");
-                    $("#wind").text("Wind Speed: " + weatherData.wind.toFixed(2) + " mph");
+                    $("#wind").text("Wind Speed: " + weatherData.wind.toFixed(2) + " MPH");
                     $("#humidity").text("Humidity: " + weatherData.humidity + "%");
                     $("#current-pic").attr("src", "http://openweathermap.org/img/w/" + weatherData.icon + ".png");
                 })
@@ -44,7 +62,7 @@ $(document).ready(function () {
                     getForecast(weatherData, forecastData);
                     renderCities();
                 })
-                
+
                 .fail(function (error) {
                     console.log(error);
                 });
@@ -95,7 +113,7 @@ $(document).ready(function () {
             const forecastContent = $("<div>")
                 .append($("<p>").addClass("text-center fs-4").text(shortDate))
                 .append($("<p>").text("Temp: " + forecastTemperature.toFixed(0) + " °F"))
-                .append($("<p>").text("Wind: " + forecastWind.toFixed(0) + " mph"))
+                .append($("<p>").text("Wind: " + forecastWind.toFixed(0) + " MPH"))
                 .append($("<p>").text("Humidity: " + forecastHumidity + "%"))
                 .append($("<img>").attr("src", "http://openweathermap.org/img/w/" + forecastIcon + ".png"));
 
