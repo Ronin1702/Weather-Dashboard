@@ -20,10 +20,10 @@ WHEN I search for a valid city by clicking the search button or pressing enter
 THEN I am presented with current and future conditions for that city and that city is added to the search history
 WHEN I type the city name in disreglard of case sensitivity
 THEN I am always corrected with first letter of each word capitalized
-WHEN I search the same city
-THEN I won't be adding it again to the search history
+WHEN I search the same city by accident
+THEN I will NOT be adding it again to the search history
 WHEN I search for more than 5 different cities
-THEN I start to replace the last city searched with the newest city input
+THEN I replace the last city searched with the newest city input
 WHEN I view current weather conditions for that city
 THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, and the the wind speed
 WHEN I view future weather conditions for that city
