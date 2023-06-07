@@ -20,12 +20,6 @@ $(function () {
 
       $.getJSON(currentWeatherUrl)
         .done(function (currentData) {
-          if (currentData.cod === "404") {
-            // If the city is not found, show the alert modal
-            var alertModal = new bootstrap.Modal(document.getElementById('alertModal'), {});
-            alertModal.show();
-            return;
-          }
           console.log(currentData) //check to see how the parameters are structured.
           var weatherIcon = currentData.weather[0].icon;
           weatherData = {
@@ -44,16 +38,10 @@ $(function () {
           storeSearchHistory(searchInput); //only store the search inputs into search history when data passes since it's inside of the .done
         })
 
-        // .fail(function (alertModal) { //here I changed changed from error to alertModal for when the response fails
-        //   var alertModal = new bootstrap.Modal(document.getElementById('alertModal'), {}); // get the element from html
-        //             alertModal.show(); //show alertModal when response fails, this why it includes more than just 404
-        //             return;
-        // });
-
-        //Below I try the jQuery way for optimize:
-        .fail(function () {
-          $('#alertModal').Modal.show;
-          return;
+        .fail(function (alertModal) { //here I changed changed from error to alertModal for when the response fails
+          var alertModal = new bootstrap.Modal(document.getElementById('alertModal'), {}); // get the element from html
+                    alertModal.show(); //show alertModal when response fails, this why it includes more than just 404
+                    return;
         });
 
       $.getJSON(forecastWeatherUrl)
@@ -63,9 +51,9 @@ $(function () {
 
           storeSearchHistory(searchInput);
         })
-        .fail(function (alertModal) { //same alertModal pop up for forecast request fails.
-          var alertModal = new bootstrap.Modal(document.getElementById('alertModal'), {});
-          alertModal.show();
+
+        .fail(function (error) { // we do not need to make the modal function again here since a valid city name wont fetch neither current or forecast weather.
+          console.log(error)
           return;
         });
     }
