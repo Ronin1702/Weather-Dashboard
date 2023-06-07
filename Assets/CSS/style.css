@@ -1,3 +1,16 @@
 #history li:hover {
     cursor: pointer;
 }
+
+#alertModal {
+    font-family: 'Cherry Bomb One', cursive;
+}
+
+.mainpage {
+    font-family: 'Monomaniac One',
+        sans-serif;
+}
+
+h1 {
+    font-family: 'Rubik Puddles', cursive;
+}

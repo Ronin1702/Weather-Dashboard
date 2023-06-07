@@ -18,6 +18,12 @@
     <!-- Link the newest Bootstrap CSS-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- Link to google fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Monomaniac+One&family=Rubik+Puddles&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="./Assets/CSS/style.css">
 </head>
 
@@ -27,7 +33,7 @@
     </header>
 
     <div class="container-fluid">
-        <div class="row justify-content-around">
+        <div class="mainpage row justify-content-around">
             <form class="col ms-2">
                 <h2 class="mt-2">Search for a City:</h2>
                 <div class="col-12">
@@ -73,26 +79,22 @@
         <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
-                    <div class="modal-header bg-warning opacity-80">
+                    <div class="col modal-header bg-warning bg-gradient opacity-75">
                         <h4 class="modal-title text-light fs-4" id="alertModalLabel">Oops...</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body bg-warning opacity-75 fs-3 text-center">
+                    <div class="col modal-body bg-warning bg-gradient opacity fs-3 text-light text-center">
                         An invald city name is entered.
                         <br>
                         Please enter a valid city name.
                     </div>
-                    <div class="modal-footer modal-body bg-warning opacity-75">
+                    <div class="col modal-footer modal-body bg-warning bg-gradient opacity-50">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
-
-
     <script src="./Assets/JS/script.js" defer></script>
 </body>
 
