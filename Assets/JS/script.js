@@ -20,6 +20,7 @@ $(function () {
 
       $.getJSON(currentWeatherUrl)
         .done(function (currentData) {
+          console.log(currentData) //check to see how the parameters are structured.
           var weatherIcon = currentData.weather[0].icon;
           weatherData = {
             temp: convertToFahrenheit(currentData.main.temp),
@@ -93,14 +94,14 @@ $(function () {
         console.log(error);
       });
   }
-  
+
   locateBtnEl.on('click', handleLocateButtonClick);
-  
+
   function convertToFahrenheit(kelvin) {
     return (kelvin - 273.15) * 9 / 5 + 32; //Original data is in kelvin, convert it to F
   }
 
-  function convertToMilesPerHour(mps) { //Original data is in m/s, convert it fo mps
+  function convertToMilesPerHour(mps) { //Original data is in meters/second, convert it fo miles per hour
     return mps * 2.23694;
   }
 
@@ -109,8 +110,8 @@ $(function () {
     forecastContainer.empty();
 
     let dailyData = forecastData.list.filter(item => item.dt_txt.includes("12:00:00")); // get rid off the times in the string
-
-    for (let i = 0; i < dailyData.length; i++) {
+      console.log(dailyData) //I log the dailyData to check the arrays
+    for (let i = 0; i < dailyData.length; i++) { //noon is the cut off time, date and time of O go to the next day at noon,
       const forecast = dailyData[i];
       const forecastDate = new Date(forecast.dt_txt);
       const forecastTemperature = convertToFahrenheit(forecast.main.temp);
