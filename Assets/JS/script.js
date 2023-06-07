@@ -21,7 +21,7 @@ $(function () {
           .done(function (currentData) {
             var weatherIcon = currentData.weather[0].icon;
             weatherData = {
-              temp: convertToFarhenheit(currentData.main.temp),
+              temp: convertToFahrenheit(currentData.main.temp),
               wind: convertToMilesPerHour(currentData.wind.speed),
               humidity: currentData.main.humidity,
               icon: weatherIcon
@@ -52,7 +52,7 @@ $(function () {
       }
     }
   
-    function convertToFarhenheit(kelvin) {
+    function convertToFahrenheit(kelvin) {
       return (kelvin - 273.15) * 9 / 5 + 32; //Original data is in kelvin, convert it to F
     }
   
@@ -69,7 +69,7 @@ $(function () {
       for (let i = 0; i < dailyData.length; i++) {
         const forecast = dailyData[i];
         const forecastDate = new Date(forecast.dt_txt);
-        const forecastTemperature = convertToFarhenheit(forecast.main.temp);
+        const forecastTemperature = convertToFahrenheit(forecast.main.temp);
         const forecastWind = convertToMilesPerHour(forecast.wind.speed);
         const forecastHumidity = forecast.main.humidity;
         const forecastIcon = forecast.weather[0].icon;
