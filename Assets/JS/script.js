@@ -52,7 +52,7 @@ $(document).ready(function () {
                     $("#temp").text("Temperature: " + weatherData.temp.toFixed(2) + " °F");
                     $("#wind").text("Wind Speed: " + weatherData.wind.toFixed(2) + " MPH");
                     $("#humidity").text("Humidity: " + weatherData.humidity + "%");
-                    $("#current-pic").attr("src", "http://openweathermap.org/img/w/" + weatherData.icon + ".png");
+                    $("#current-pic").attr("src", "https://openweathermap.org/img/w/" + weatherData.icon + ".png");
 
                     storeSearchHistory(searchInput);  // Store city in localStorage here
 
@@ -124,7 +124,7 @@ $(document).ready(function () {
                 .append($("<p>").text("Temp: " + forecastTemperature.toFixed(0) + " °F"))
                 .append($("<p>").text("Wind: " + forecastWind.toFixed(0) + " MPH"))
                 .append($("<p>").text("Humidity: " + forecastHumidity + "%"))
-                .append($("<img>").attr("src", "http://openweathermap.org/img/w/" + forecastIcon + ".png"));
+                .append($("<img>").attr("src", "https://openweathermap.org/img/w/" + forecastIcon + ".png"));
 
             console.log(forecastDate);
             // Append the content to the forecast card
