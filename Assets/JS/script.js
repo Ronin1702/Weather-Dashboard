@@ -20,6 +20,12 @@ $(function () {
 
       $.getJSON(currentWeatherUrl)
         .done(function (currentData) {
+          if (currentData.cod === "404") {
+            // If the city is not found, show the alert modal
+            var alertModal = new bootstrap.Modal(document.getElementById('alertModal'), {});
+            alertModal.show();
+            return;
+          }
           console.log(currentData) //check to see how the parameters are structured.
           var weatherIcon = currentData.weather[0].icon;
           weatherData = {
@@ -30,15 +36,24 @@ $(function () {
           };
           //Append texts to the targets below:
           $("#city-name").text(`Today in ${searchInput}, ${formattedDate}`);
-          $("#temp").text(`Temperature: ${weatherData.temp.toFixed(2)} °F`); //round to two decimals
-          $("#wind").text(`Wind Speed: ${weatherData.wind.toFixed(2)} MPH`); //round to two decimals
+          $("#temp").text(`Temperature: ${weatherData.temp.toFixed(0)} °F`); //round to zero decimals, no one needs the two decimal lol
+          $("#wind").text(`Wind Speed: ${weatherData.wind.toFixed(0)} MPH`); //round to zero decimals, no one needs the two decimal lol
           $("#humidity").text(`Humidity: ${weatherData.humidity}%`);
           $("#current-pic").attr("src", `https://openweathermap.org/img/wn/${weatherData.icon}@4x.png`);
 
-          storeSearchHistory(searchInput); //store the search inputs into search history
+          storeSearchHistory(searchInput); //only store the search inputs into search history when data passes since it's inside of the .done
         })
-        .fail(function (error) {
-          console.log(error);
+
+        // .fail(function (alertModal) { //here I changed changed from error to alertModal for when the response fails
+        //   var alertModal = new bootstrap.Modal(document.getElementById('alertModal'), {}); // get the element from html
+        //             alertModal.show(); //show alertModal when response fails, this why it includes more than just 404
+        //             return;
+        // });
+
+        //Below I try the jQuery way for optimize:
+        .fail(function () {
+          $('#alertModal').Modal.show;
+          return;
         });
 
       $.getJSON(forecastWeatherUrl)
@@ -48,8 +63,10 @@ $(function () {
 
           storeSearchHistory(searchInput);
         })
-        .fail(function (error) {
-          console.log(error);
+        .fail(function (alertModal) { //same alertModal pop up for forecast request fails.
+          var alertModal = new bootstrap.Modal(document.getElementById('alertModal'), {});
+          alertModal.show();
+          return;
         });
     }
   }
@@ -110,7 +127,7 @@ $(function () {
     forecastContainer.empty();
 
     let dailyData = forecastData.list.filter(item => item.dt_txt.includes("12:00:00")); // get rid off the times in the string
-      console.log(dailyData) //I log the dailyData to check the arrays
+    console.log(dailyData) //I log the dailyData to check the arrays
     for (let i = 0; i < dailyData.length; i++) { //noon is the cut off time, date and time of O go to the next day at noon,
       const forecast = dailyData[i];
       const forecastDate = new Date(forecast.dt_txt);

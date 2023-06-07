@@ -70,17 +70,19 @@
             </div>
         </div>
         <!-- I want to build an bootstrap alert modal to inform the users if a invalid city name is entered-->
-        <div class="col modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+        <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="alertModalLabel">Invalid City</h5>
+                    <div class="modal-header bg-warning opacity-80">
+                        <h4 class="modal-title text-light fs-4" id="alertModalLabel">Oops...</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
-                        The city name entered is invalid. Please enter a valid city name.
+                    <div class="modal-body bg-warning opacity-75 fs-3 text-center">
+                        An invald city name is entered.
+                        <br>
+                        Please enter a valid city name.
                     </div>
-                    <div class="modal-footer">
+                    <div class="modal-footer modal-body bg-warning opacity-75">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
