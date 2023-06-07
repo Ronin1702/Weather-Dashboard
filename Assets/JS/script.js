@@ -51,7 +51,6 @@ $(function () {
           console.log(error);
         });
     }
-    storeSearchHistory(searchInput); //store the search inputs into search history
   }
 
   // Function to get the current city name
@@ -94,9 +93,9 @@ $(function () {
         console.log(error);
       });
   }
-
-
+  
   locateBtnEl.on('click', handleLocateButtonClick);
+  
   function convertToFahrenheit(kelvin) {
     return (kelvin - 273.15) * 9 / 5 + 32; //Original data is in kelvin, convert it to F
   }
