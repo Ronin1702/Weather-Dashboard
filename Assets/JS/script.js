@@ -27,7 +27,7 @@ $(function () {
               icon: weatherIcon
             };
             //Append texts to the targets below:
-            $("#city-name").text(`${searchInput} Today, ${formattedDate}`);
+            $("#city-name").text(`Today in ${searchInput}, ${formattedDate}`);
             $("#temp").text(`Temperature: ${weatherData.temp.toFixed(2)} °F`); //round to two decimals
             $("#wind").text(`Wind Speed: ${weatherData.wind.toFixed(2)} MPH`); //round to two decimals
             $("#humidity").text(`Humidity: ${weatherData.humidity}%`);
@@ -81,11 +81,11 @@ $(function () {
   
         const forecastCard = $("<div>").addClass("col forecast bg-secondary bg-gradient text-white m-1 rounded"); 
         const forecastContent = $("<div>").addClass("col") //add the class col to make the cards display evenly regardless screensize
-          .append($("<p>").addClass("text-center fs-4").text(shortDate))
+          .append($("<p>").addClass("mt-2 fs-4").text(shortDate))
+          .append($("<img>").attr("src", `https://openweathermap.org/img/wn/${forecastIcon}@2x.png`)) //make the icon 2x size
           .append($("<p>").text(`Temp: ${forecastTemperature.toFixed(0)} °F`)) //round to no decimals
           .append($("<p>").text(`Wind: ${forecastWind.toFixed(0)} MPH`)) //round to no decimals
-          .append($("<p>").text(`Humidity: ${forecastHumidity}%`))
-          .append($("<img>").attr("src", `https://openweathermap.org/img/wn/${forecastIcon}@2x.png`)); //make the icon 2x size
+          .append($("<p>").text(`Humidity: ${forecastHumidity}%`)); 
   
         forecastCard.append(forecastContent);
         forecastContainer.append(forecastCard);
