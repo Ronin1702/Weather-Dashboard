@@ -125,12 +125,19 @@ $(document).ready(function () {
             forecastContainer.append(forecastCard);
         }
     }
-
+    // Helper function to format input
+    function formatInput(input) {
+        let words = input.toLowerCase().split(' ');
+        for (let i = 0; i < words.length; i++) {
+            words[i] = words[i][0].toUpperCase() + words[i].substr(1);
+        }
+        return words.join(' ');
+    }
 
     // Handle form submission
     function handleFormSubmit(event) {
         event.preventDefault();
-        var searchInput = searchInputEl.val().trim();
+        var searchInput = formatInput(searchInputEl.val().trim());
 
         // Check if the search input is not empty
         if (searchInput !== "") {
@@ -202,6 +209,8 @@ $(document).ready(function () {
 
     // Store search history
     function storeSearchHistory(searchInput) {
+        searchInput = formatInput(searchInput);
+        
         if (searchHistory.includes(searchInput)) {
             // If it exists, return without adding it again
             return;
@@ -248,7 +257,7 @@ $(document).ready(function () {
         }
     },
         'li.list-group-item'
-        );
+    );
 
 });
 
