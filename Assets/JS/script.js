@@ -107,7 +107,7 @@ $(document).ready(function () {
             const shortDate = month + "/" + day + "/" + year;
 
             // Create the forecast card element
-            const forecastCard = $("<div>").addClass("col-2 forecast bg-primary text-white m-2 rounded");
+            const forecastCard = $("<div>").addClass("col-2 forecast bg-secondary bg-gradient text-white m-1 rounded");
 
             // Create the content for the forecast card
             const forecastContent = $("<div>")
