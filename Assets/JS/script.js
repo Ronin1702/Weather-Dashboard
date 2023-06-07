@@ -48,7 +48,7 @@ $(document).ready(function () {
                         icon: weatherIcon
                     };
                     // Update the UI with the current weather data
-                    $("#city-name").text(searchInput + " Today, "+ formattedDate);
+                    $("#city-name").text(searchInput + " Today, " + formattedDate);
                     $("#temp").text("Temperature: " + weatherData.temp.toFixed(2) + " °F");
                     $("#wind").text("Wind Speed: " + weatherData.wind.toFixed(2) + " MPH");
                     $("#humidity").text("Humidity: " + weatherData.humidity + "%");
@@ -177,13 +177,6 @@ $(document).ready(function () {
         // Clear previous history
         historyEl.empty();
 
-        // Hide the list-group-items if searchHistory is empty, else show them
-        if (searchHistory.length === 0) {
-            $('.li.list-group-item').addClass('d-none');
-        } else {
-            $('.li.list-group-item').removeClass('d-none');
-        }
-
         for (var i = searchHistory.length; i >= 0; i--) {
             var cityInput = searchHistory[i];
             // Append a city list div of <li>
@@ -246,12 +239,16 @@ $(document).ready(function () {
         mouseenter: function () {
             $(this).css('background-color', '#0d6efd');
             $(this).css('color', '#ffffff');
+            $(this).css('opacity', '75%');
         },
         mouseleave: function () {
             $(this).css('background-color', '');
             $(this).css('color', '');
+            $(this).css('opacity', '100%');
         }
-    }, 'li.list-group-item');
+    },
+        'li.list-group-item'
+        );
 
 });
 
