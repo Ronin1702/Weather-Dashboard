@@ -2,9 +2,7 @@ $(function () {
   const apiKey = 'e21937afa0005be2a3ff4b5545611fd7'; //OpenWeahter API Key
   const historyEl = $("#history");
   const searchInputEl = $("#searchInput");
-  const searchBtnEl = $("#searchBtn");
   const locateBtnEl = $("#locateBtn"); // Locate button element
-
   let searchHistory = JSON.parse(localStorage.getItem("history")) || []; //get search history from localStorage if there's any
   let weatherData;
 
@@ -40,8 +38,8 @@ $(function () {
 
         .fail(function (alertModal) { //here I changed changed from error to alertModal for when the response fails
           var alertModal = new bootstrap.Modal(document.getElementById('alertModal'), {}); // get the element from html
-                    alertModal.show(); //show alertModal when response fails, this why it includes more than just 404
-                    return;
+          alertModal.show(); //show alertModal when response fails, this why it includes more than just 404
+          return;
         });
 
       $.getJSON(forecastWeatherUrl)
