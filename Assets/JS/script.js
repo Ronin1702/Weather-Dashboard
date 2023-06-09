@@ -27,15 +27,10 @@ function initAutocomplete() {
   
     autocomplete.addListener('place_changed', function() {
       const place = autocomplete.getPlace();
-      if (!place.geometry) {
-        window.alert("No details available for input: '" + place.name + "'");
-        return;
-      }
-  
       const city = getAddressComponent(place.address_components, 'locality');
       const state = getAddressComponent(place.address_components, 'administrative_area_level_1');
       const country = getAddressComponent(place.address_components, 'country');
-  console.log(country)
+      console.log(country)
       const fullAddress = [city, state, country].filter(Boolean).join(', ');
   
       fetchWeatherData(fullAddress);
