@@ -20,19 +20,19 @@ $(function () {
     return null;
   }
 
-function initAutocomplete() {
+  function initAutocomplete() {
     const searchInputEl = document.getElementById('searchInput');
-  
+
     const autocomplete = new google.maps.places.Autocomplete(searchInputEl);
-  
-    autocomplete.addListener('place_changed', function() {
+
+    autocomplete.addListener('place_changed', function () {
       const place = autocomplete.getPlace();
       const city = getAddressComponent(place.address_components, 'locality');
       const state = getAddressComponent(place.address_components, 'administrative_area_level_1');
       const country = getAddressComponent(place.address_components, 'country');
       console.log(country)
       const fullAddress = [city, state, country].filter(Boolean).join(', ');
-  
+
       fetchWeatherData(fullAddress);
       storeSearchHistory(fullAddress);
       searchInputEl.value = ''; // Reset the search input field
@@ -103,7 +103,7 @@ function initAutocomplete() {
         position => {
           const { latitude, longitude } = position.coords;
           const locationUrl = `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=${apiKey}`;
-  
+
           $.getJSON(locationUrl)
             .done(data => {
               const location = {
@@ -123,20 +123,20 @@ function initAutocomplete() {
         }
       );
     });
-  }  
+  }
 
   function handleLocateButtonClick() {
     getCurrentCity()
       .then(location => {
         // Create a full address string
         const fullAddress = `${location.cityName}, ${location.stateName}, ${location.countryName}`;
-  
+
         // Set the full address in the search input
         searchInputEl.val(fullAddress);
-  
+
         // Fetch weather data for the current location
         fetchWeatherData(fullAddress);
-  
+
         // Show the weather section
         $('#weathers').removeClass('d-none').addClass('d-block');
       })
@@ -228,7 +228,7 @@ function initAutocomplete() {
   function renderCities() {
     historyEl.empty();
 
-    for (var i = searchHistory.length; i >= 0; i--) {
+    for (var i = searchHistory.length - 1; i >= 0; i--) {
       var cityInput = searchHistory[i];
       var cityDiv = $("<li>").addClass("list-group-item").text(cityInput);
       cityDiv.on("click", function () {
