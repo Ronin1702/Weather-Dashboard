@@ -1,13 +1,14 @@
 # Weather-Dashboard
 This is a simple weather app that shows the chosen city's current weather and its 5-day forecast.
 
-This site uses:\
-[OpenWeatherAPI](https://openweathermap.org/api) to fetch its data,\
-[jQuary](https://jquery.com/) to simply my codes,\
-[Boostrap](https://getbootstrap.com/docs/5.1/getting-started/introduction/) for CSS styling,\
-[FontAwesome](https://fontawesome.com/docs) for styling icons,\
-[GooglePlaceAPI](https://developers.google.com/maps/documentation/places/web-service/autocomplete) for Place Autocomplete,\
-[GoogleFonts](https://fonts.google.com/) for Fonts.
+This site uses:
+
+- [OpenWeatherAPI](https://openweathermap.org/api) to fetch weather data
+- [jQuery](https://jquery.com/) for shortening my codes
+- [Bootstrap](https://getbootstrap.com/docs/5.1/getting-started/introduction/) for CSS styling
+- [FontAwesome](https://fontawesome.com/docs) for styling icons
+- [GooglePlaceAPI](https://developers.google.com/maps/documentation/places/web-service/autocomplete) for Place Autocomplete
+- [GoogleFonts](https://fonts.google.com/) for Fonts
 
 ## Description
 ```md
