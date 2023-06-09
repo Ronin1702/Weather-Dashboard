@@ -10,11 +10,16 @@ $(function () {
   function getAddressComponent(components, type) {
     for (let i = 0; i < components.length; i++) {
       if (components[i].types.includes(type)) {
-        return components[i].long_name;
+        if (type === 'country') {
+          return components[i].short_name;
+        } else {
+          return components[i].long_name;
+        }
       }
     }
     return null;
   }
+  
   function initAutocomplete() {
     const searchInputEl = document.getElementById('searchInput');
   
@@ -30,7 +35,7 @@ $(function () {
       const city = getAddressComponent(place.address_components, 'locality');
       const state = getAddressComponent(place.address_components, 'administrative_area_level_1');
       const country = getAddressComponent(place.address_components, 'country');
-  
+  console.log(country)
       const fullAddress = [city, state, country].filter(Boolean).join(', ');
   
       fetchWeatherData(fullAddress);
@@ -101,11 +106,16 @@ $(function () {
         position => {
           const { latitude, longitude } = position.coords;
           const locationUrl = `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=${apiKey}`;
-
+  
           $.getJSON(locationUrl)
             .done(data => {
-              const cityName = data[0].name;
-              resolve(cityName);
+              const location = {
+                cityName: data[0].name,
+                stateName: data[0].state,
+                countryName: data[0].country
+              };
+              resolve(location);
+              console.log(location)
             })
             .fail(error => {
               reject(error);
@@ -116,17 +126,20 @@ $(function () {
         }
       );
     });
-  }
+  }  
 
   function handleLocateButtonClick() {
     getCurrentCity()
-      .then(cityName => {
-        // Set the current city name in the search input
-        searchInputEl.val(cityName);
-
-        // Fetch weather data for the current city
-        fetchWeatherData(cityName);
-
+      .then(location => {
+        // Create a full address string
+        const fullAddress = `${location.cityName}, ${location.stateName}, ${location.countryName}`;
+  
+        // Set the full address in the search input
+        searchInputEl.val(fullAddress);
+  
+        // Fetch weather data for the current location
+        fetchWeatherData(fullAddress);
+  
         // Show the weather section
         $('#weathers').removeClass('d-none').addClass('d-block');
       })
