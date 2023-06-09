@@ -16,7 +16,7 @@ AS A traveler
 I WANT to see the weather outlook for multiple cities
 SO THAT I can plan a trip accordingly
 ```
-
+### 
 ```md
 GIVEN a weather dashboard with form inputs
 WHEN I search for a valid city by clicking the search button or pressing enter
@@ -44,9 +44,9 @@ THEN I am presented with an empty search history list.
 ```
 
 ## Links
-Deployed Wesite: https://ronin1702.github.io/Weather-Dashboard/
+- Deployed Wesite: https://ronin1702.github.io/Weather-Dashboard/
 
-GitHub Repo: https://github.com/Ronin1702/Weather-Dashboard/
+- GitHub Repo: https://github.com/Ronin1702/Weather-Dashboard/
 
-### Screenshot
+## Screenshot
 ![Screenshot](./Assets/Images/weather-dashboard-screenshot.png)
