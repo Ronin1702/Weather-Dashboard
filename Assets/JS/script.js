@@ -64,7 +64,8 @@ function initAutocomplete() {
             icon: weatherIcon
           };
           //Append texts to the targets below:
-          $("#city-name").text(`Today in ${searchInput}, ${formattedDate}`);
+          $("#city-name").text(`Today in ${searchInput}`);
+          $("#currentDate").text(`${formattedDate}`);
           $("#temp").text(`Temperature: ${weatherData.temp.toFixed(0)} °F`); //round to zero decimals, no one needs the two decimal lol
           $("#wind").text(`Wind Speed: ${weatherData.wind.toFixed(0)} MPH`); //round to zero decimals, no one needs the two decimal lol
           $("#humidity").text(`Humidity: ${weatherData.humidity}%`);
@@ -175,7 +176,7 @@ function initAutocomplete() {
       const shortDate = `${month}/${day}/${year}`; //put them together can name it shortDate
 
       const forecastCard = $("<div>").addClass("col forecast bg-secondary bg-gradient text-white m-1 rounded");
-      const forecastContent = $("<div>").addClass("col") //add the class col to make the cards display evenly regardless screensize
+      const forecastContent = $("<div>").addClass("col text-center") //add the class col to make the cards display evenly regardless screensize
         .append($("<p>").addClass("mt-2 fs-4").text(shortDate))
         .append($("<img>").attr("src", `https://openweathermap.org/img/wn/${forecastIcon}@2x.png`)) //make the icon 2x size
         .append($("<p>").text(`Temp: ${forecastTemperature.toFixed(0)} °F`)) //round to no decimals
