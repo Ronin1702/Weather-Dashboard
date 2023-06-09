@@ -158,7 +158,7 @@ function initAutocomplete() {
     const forecastContainer = $("#forecast");
     forecastContainer.empty();
 
-    let dailyData = forecastData.list.filter(item => item.dt_txt.includes("09:00:00")); // forecast refreshes at 9am each day
+    let dailyData = forecastData.list.filter(item => item.dt_txt.includes("00:00:00")); // forecast refreshes at midnight each day
     //forecast is listed each 3 hours. So that I only want 9 am of each day.
     for (let i = 0; i < dailyData.length; i++) { //noon is the cut off time, date and time of O go to the next day at noon,
       const forecast = dailyData[i];
