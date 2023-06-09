@@ -20,7 +20,7 @@ $(function () {
     return null;
   }
 
-  async function initAutocomplete() {
+function initAutocomplete() {
     const searchInputEl = document.getElementById('searchInput');
   
     const autocomplete = new google.maps.places.Autocomplete(searchInputEl);
