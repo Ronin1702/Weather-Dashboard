@@ -19,8 +19,8 @@ $(function () {
     }
     return null;
   }
-  
-  function initAutocomplete() {
+
+  async function initAutocomplete() {
     const searchInputEl = document.getElementById('searchInput');
   
     const autocomplete = new google.maps.places.Autocomplete(searchInputEl);
@@ -86,6 +86,7 @@ $(function () {
 
       $.getJSON(forecastWeatherUrl)
         .done(function (forecastData) {
+          console.log(forecastData)
           getForecast(weatherData, forecastData);
           renderCities();
 
@@ -115,7 +116,7 @@ $(function () {
                 countryName: data[0].country
               };
               resolve(location);
-              console.log(location)
+              console.log(location) //check if the location is returned right.
             })
             .fail(error => {
               reject(error);
@@ -162,11 +163,12 @@ $(function () {
     const forecastContainer = $("#forecast");
     forecastContainer.empty();
 
-    let dailyData = forecastData.list.filter(item => item.dt_txt.includes("12:00:00")); // get rid off the times in the string
-    console.log(dailyData) //I log the dailyData to check the arrays
+    let dailyData = forecastData.list.filter(item => item.dt_txt.includes("09:00:00")); // forecast refreshes at 9am each day
+    //forecast is listed each 3 hours. So that I only want 9 am of each day.
     for (let i = 0; i < dailyData.length; i++) { //noon is the cut off time, date and time of O go to the next day at noon,
       const forecast = dailyData[i];
       const forecastDate = new Date(forecast.dt_txt);
+      console.log(forecast.dt_txt) //confirming that I'm grabbing the right timeline and not the rest.
       const forecastTemperature = convertToFahrenheit(forecast.main.temp);
       const forecastWind = convertToMilesPerHour(forecast.wind.speed);
       const forecastHumidity = forecast.main.humidity;
