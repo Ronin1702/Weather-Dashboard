@@ -288,6 +288,6 @@ function initAutocomplete() {
       $(this).css('opacity', '100%');
     }
   },
-    'li.list-group-item' //targeting the li in the list-group-item
+    'li' //make (this) as li
   );
 });
