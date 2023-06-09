@@ -6,6 +6,43 @@ $(function () {
   let searchHistory = JSON.parse(localStorage.getItem("history")) || []; //get search history from localStorage if there's any
   let weatherData;
 
+  // Autocomplete the city names...
+  function getAddressComponent(components, type) {
+    for (let i = 0; i < components.length; i++) {
+      if (components[i].types.includes(type)) {
+        return components[i].long_name;
+      }
+    }
+    return null;
+  }
+  function initAutocomplete() {
+    const searchInputEl = document.getElementById('searchInput');
+  
+    const autocomplete = new google.maps.places.Autocomplete(searchInputEl);
+  
+    autocomplete.addListener('place_changed', function() {
+      const place = autocomplete.getPlace();
+      if (!place.geometry) {
+        window.alert("No details available for input: '" + place.name + "'");
+        return;
+      }
+  
+      const city = getAddressComponent(place.address_components, 'locality');
+      const state = getAddressComponent(place.address_components, 'administrative_area_level_1');
+      const country = getAddressComponent(place.address_components, 'country');
+  
+      const fullAddress = [city, state, country].filter(Boolean).join(', ');
+  
+      fetchWeatherData(fullAddress);
+      storeSearchHistory(fullAddress);
+      searchInputEl.value = ''; // Reset the search input field
+      $('#weathers').removeClass('d-none').addClass('d-block');
+    });
+  }
+
+  // Call the function to initialise autocomplete
+  initAutocomplete();
+
   function fetchWeatherData(searchInput) {
     const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchInput}&appid=${apiKey}`;
     const forecastWeatherUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${searchInput}&appid=${apiKey}`;
